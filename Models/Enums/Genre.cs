@@ -4,10 +4,7 @@ public enum Genre
 {
     Adventure,
     Business,
-    
     Comedy,
-
     Romantic,
-
     Science,
 }

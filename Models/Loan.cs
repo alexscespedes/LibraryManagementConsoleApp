@@ -9,4 +9,6 @@ public class Loan
 
     public DateTime CheckoutDate { get; set; }
     public DateTime DueDate { get; set; }
+
+    public LoanStatus status { get; set; }
 }
