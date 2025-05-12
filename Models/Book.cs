@@ -2,11 +2,11 @@ namespace LibraryManagement;
 
 public class Book 
 {
-    public required string ISBN { get; set; }
+    public string ISBN { get; set; }
 
-    public required string Title { get; set; }
+    public string Title { get; set; }
 
-    public required string Author { get; set; }
+    public string Author { get; set; }
 
     public Genre GenreBook { get; set; }
 

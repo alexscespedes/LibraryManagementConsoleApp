@@ -10,9 +10,9 @@ public class ConsoleHelper
         Console.WriteLine($" ISBN: {book.ISBN} | Title: {book.Title} | Author: {book.Author} | Genre: {book.GenreBook} | Status: {status} ");
     }
 
-    public static bool IsValidISBNCode(string str) 
+    public bool IsValidISBNCode(string str) 
     {
-        string strRegex = @"^(?=(?:[^0:9]*[0:9]){10}(?:(?:[^0:9]*[0:9]){3})?$)[\d-]+$";
+        string strRegex = @"^(?=(?:[^0-9]*[0-9]){10}(?:(?:[^0-9]*[0-9]){3})?$)[\d-]+$";
         Regex re = new Regex(strRegex);
         if (re.IsMatch(str))
         {
