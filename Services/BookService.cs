@@ -49,4 +49,35 @@ public class BookService {
         Console.WriteLine($"No book found with ISBN: {isbn}");
         return false;
     }
+
+    public bool UpdateBook(Book newBook) 
+    {
+        if (!helper.IsValidISBNCode(newBook.ISBN))
+        {
+            Console.WriteLine("The ISBN is not valid");
+            return false;
+        }
+        
+        if (string.IsNullOrEmpty(newBook.Title) || string.IsNullOrEmpty(newBook.Author))
+        {
+            Console.WriteLine("Error: Title and Author are required.");
+            return false;
+        }
+
+        var book = books.SingleOrDefault(b => b.ISBN == newBook.ISBN);
+
+        if (book != null) 
+        {
+            book.Title = newBook.Title;
+            book.Author = newBook.Author;
+            book.GenreBook = newBook.GenreBook;
+
+            Console.WriteLine("Book updated successfully.");
+            return true;
+        }
+
+            Console.WriteLine($"No book found with ISBN: {newBook.ISBN}");
+            return false;
+    
+    }
 }
