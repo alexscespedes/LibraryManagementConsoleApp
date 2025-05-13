@@ -25,9 +25,28 @@ public class BookService {
 
     public void ViewAllBooks() 
     {
+        if (books.Count == 0)
+        {
+            Console.WriteLine("No books found");
+        }
+
         foreach (var book in books)
         {
             helper.PrintBook(book);
         }
+    }
+
+    public bool RemoveBook(string isbn) 
+    {
+        var book = books.SingleOrDefault(b => b.ISBN == isbn);
+
+        if (book != null)
+        {
+            books.Remove(book);
+            Console.WriteLine("Book removed successfully");
+            return true;
+        }
+        Console.WriteLine($"No book found with ISBN: {isbn}");
+        return false;
     }
 }

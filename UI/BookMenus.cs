@@ -41,6 +41,7 @@ public class BookMenus
                             
                     break;
                 case 5:
+                RemoveBook(bookService);
                     break;
                 case 6:
                             
@@ -109,6 +110,14 @@ public class BookMenus
         };
 
         service.AddBook(newBook);
+    }
+
+    static void RemoveBook(BookService service) 
+    {
+        Console.Write("Enter the isbn of the book to remove: ");
+        string isbn = Console.ReadLine()!;
+        service.RemoveBook(isbn);
+
     }
 
 }
