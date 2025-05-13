@@ -6,11 +6,11 @@ public class Patron
     static int nextId;
     public int Id { get; private set; }
 
-    public required string Name { get; set; }
+    public string Name { get; set; }
 
-    public required string PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; }
 
-    public string? Email { get; set; }
+    public string Email { get; set; }
 
     public List<Loan> ActiveLoans { get; set; }
 

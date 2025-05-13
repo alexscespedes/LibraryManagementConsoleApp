@@ -5,6 +5,7 @@ public class MenuSystem
     public void DisplayMainMenu() 
     {
         BookMenus bookMenus = new BookMenus();
+        PatronMenus patronMenus = new PatronMenus();
         bool exit = false;
 
         while(!exit) 
@@ -32,7 +33,7 @@ public class MenuSystem
                     bookMenus.DisplayBookMenu();
                     break;
                 case 2:
-                        
+                    patronMenus.DisplayPatronMenu();
                     break;
                 case 3: 
                         
