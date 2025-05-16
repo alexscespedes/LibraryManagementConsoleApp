@@ -1,30 +1,33 @@
 namespace LibraryManagement;
 
 public class BookService {
-    private List<Book> books = new List<Book>();
-    ConsoleHelper helper = new ConsoleHelper(); 
+    private BookRepository _bookRepository;
+    ConsoleHelper helper = new ConsoleHelper();
 
-    public bool AddBook(Book book) 
+    public BookService(BookRepository bookRepository)
+    {
+        _bookRepository = bookRepository;
+    }
+
+    public void AddBook(Book book)
     {
         if (!helper.IsValidISBNCode(book.ISBN))
         {
             Console.WriteLine("The ISBN is not valid");
-            return false;
         }
-        
+
         if (string.IsNullOrEmpty(book.Title) || string.IsNullOrEmpty(book.Author))
         {
             Console.WriteLine("Error: Title and Author are required.");
-            return false;
         }
-        
-        books.Add(book);
+
+        _bookRepository.AddBook(book);
         Console.WriteLine($"Book '{book.Title}' by {book.Author} added successfully.");
-        return true;
     }
 
     public void ViewAllBooks() 
     {
+        var books = _bookRepository.GetAllBooks();
         if (books.Count == 0)
         {
             Console.WriteLine("No books found");
@@ -36,48 +39,44 @@ public class BookService {
         }
     }
 
-    public bool RemoveBook(string isbn) 
+    public void RemoveBook(string isbn) 
     {
-        var book = books.SingleOrDefault(b => b.ISBN == isbn);
+        var success = _bookRepository.RemoveBook(isbn);
 
-        if (book != null)
+        if (success)
         {
-            books.Remove(book);
             Console.WriteLine("Book removed successfully");
-            return true;
         }
-        Console.WriteLine($"No book found with ISBN: {isbn}");
-        return false;
+        else
+        {
+            Console.WriteLine($"No book found with ISBN: {isbn}");
+        }
     }
 
-    public bool UpdateBook(Book newBook) 
+    public void UpdateBook(Book newBook)
     {
         if (!helper.IsValidISBNCode(newBook.ISBN))
         {
             Console.WriteLine("The ISBN is not valid");
-            return false;
+
         }
-        
+
         if (string.IsNullOrEmpty(newBook.Title) || string.IsNullOrEmpty(newBook.Author))
         {
             Console.WriteLine("Error: Title and Author are required.");
-            return false;
+
         }
 
-        var book = books.SingleOrDefault(b => b.ISBN == newBook.ISBN);
+        var success = _bookRepository.UpdateBook(newBook);
 
-        if (book != null) 
+        if (success)
         {
-            book.Title = newBook.Title;
-            book.Author = newBook.Author;
-            book.GenreBook = newBook.GenreBook;
-
             Console.WriteLine("Book updated successfully.");
-            return true;
         }
 
+        else
+        {
             Console.WriteLine($"No book found with ISBN: {newBook.ISBN}");
-            return false;
-    
+        }
     }
 }

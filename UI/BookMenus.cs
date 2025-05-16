@@ -2,14 +2,13 @@ namespace LibraryManagement;
 
 public class BookMenus 
 {
-    
-
-    public void DisplayBookMenu() 
+    public void DisplayBookMenu()
     {
-        BookService bookService = new BookService();
+        var repository = new BookRepository();
+        BookService bookService = new BookService(repository);
         bool exit = false;
 
-        while(!exit) 
+        while (!exit)
         {
             Console.WriteLine("===== BOOK MANAGEMENT =====");
             Console.WriteLine("1. Add New Book");
@@ -20,22 +19,22 @@ public class BookMenus
             Console.WriteLine("0. Return to Main Menu");
             Console.Write("Enter your choice: ");
 
-            if (!int.TryParse(Console.ReadLine(), out int userInput)) 
+            if (!int.TryParse(Console.ReadLine(), out int userInput))
             {
                 Console.WriteLine("Invalid input! Please enter a valid integer");
                 break;
             }
 
-            switch(userInput) 
+            switch (userInput)
             {
-                case 1: 
+                case 1:
                     AddBook(bookService);
                     break;
                 case 2:
-                            
+
                     break;
-                case 3: 
-                    bookService.ViewAllBooks();   
+                case 3:
+                    bookService.ViewAllBooks();
                     break;
                 case 4:
                     UpdateBookInfo(bookService);
@@ -43,10 +42,10 @@ public class BookMenus
                 case 5:
                     RemoveBook(bookService);
                     break;
-                case 0: 
+                case 0:
                     exit = true;
                     break;
-                }
+            }
         }
     }
 
