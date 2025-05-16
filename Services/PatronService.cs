@@ -1,10 +1,11 @@
 namespace LibraryManagement;
 
-public class PatronService {
-    private List<Patron> patrons = new List<Patron>();
+public class PatronService
+{
+    public List<Patron> patrons = new List<Patron>();
     ConsoleHelper helper = new ConsoleHelper();
 
-    public bool RegisterPatron(Patron patron) 
+    public bool RegisterPatron(Patron patron)
     {
         if (string.IsNullOrEmpty(patron.Name))
         {
@@ -29,7 +30,7 @@ public class PatronService {
         return true;
     }
 
-    public void ViewAllPatrons() 
+    public void ViewAllPatrons()
     {
         if (patrons.Count == 0)
         {
@@ -41,4 +42,29 @@ public class PatronService {
             helper.PrintPatron(patron);
         }
     }
+
+    public void ViewActiveLoans(int patronID)
+    {
+        var patron = patrons.SingleOrDefault(p => p.Id == patronID);
+
+        if (patron != null)
+        {
+            if (patron.ActiveLoans.Count == 0)
+            {
+                Console.WriteLine("No Active Loans");
+                return;
+            }
+            Console.WriteLine("Borrowed Books");
+            foreach (var BorrowedBook in patron.ActiveLoans)
+            {
+                helper.PrintPatronBorrowedBooks(BorrowedBook);
+            }
+
+        }
+
+
+
+
+    }
+    
 }

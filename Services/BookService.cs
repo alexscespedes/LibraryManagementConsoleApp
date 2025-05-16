@@ -1,7 +1,7 @@
 namespace LibraryManagement;
 
 public class BookService {
-    private List<Book> books = new List<Book>();
+    public List<Book> books = new List<Book>();
     ConsoleHelper helper = new ConsoleHelper(); 
 
     public bool AddBook(Book book) 
@@ -78,6 +78,5 @@ public class BookService {
 
             Console.WriteLine($"No book found with ISBN: {newBook.ISBN}");
             return false;
-    
     }
 }

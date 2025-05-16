@@ -6,6 +6,7 @@ public class MenuSystem
     {
         BookMenus bookMenus = new BookMenus();
         PatronMenus patronMenus = new PatronMenus();
+        LoanMenus loanMenus = new LoanMenus();
         bool exit = false;
 
         while(!exit) 
@@ -35,8 +36,8 @@ public class MenuSystem
                 case 2:
                     patronMenus.DisplayPatronMenu();
                     break;
-                case 3: 
-                        
+                case 3:
+                    loanMenus.DisplayLoanMenu();
                     break;
                 case 4:
                         

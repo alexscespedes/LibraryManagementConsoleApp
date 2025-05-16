@@ -15,7 +15,13 @@ public class ConsoleHelper
         Console.WriteLine($" Name: {patron.Name} | Phone Number: {patron.PhoneNumber} | Email: {patron.Email} | Number of Active Loans: {patron.ActiveLoans.Count}");
     }
 
-    public bool IsValidISBNCode(string str) 
+    public void PrintPatronBorrowedBooks(Loan loan)
+    {
+        Console.WriteLine($" Book Title: {loan.BorrowedBook.Title} | Patron Name: {loan.Borrower.Name} | Loan CheckoutDate: {loan.CheckoutDate} | Loan DueDate: {loan.DueDate} | Loan Status: {loan.Status}");
+    }
+    
+
+    public bool IsValidISBNCode(string str)
     {
         string strRegex = @"^(?=(?:[^0-9]*[0-9]){10}(?:(?:[^0-9]*[0-9]){3})?$)[\d-]+$";
         Regex re = new Regex(strRegex);
@@ -23,7 +29,7 @@ public class ConsoleHelper
         {
             return true;
         }
-        else 
+        else
         {
             return false;
         }
