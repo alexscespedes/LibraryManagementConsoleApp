@@ -1,13 +1,14 @@
 namespace LibraryManagement;
 
-public class PatronMenus 
+public class PatronMenus
 {
-    public void DisplayPatronMenu() 
+    public void DisplayPatronMenu()
     {
-        PatronService patronService = new PatronService();
+        var repository = new PatronRepository();
+        PatronService patronService = new PatronService(repository);
         bool exit = false;
 
-        while(!exit) 
+        while (!exit)
         {
             Console.WriteLine("===== PATRON MANAGEMENT =====");
             Console.WriteLine("1. Register New Patron");
@@ -18,46 +19,47 @@ public class PatronMenus
             Console.WriteLine("0. Return to Main Menu");
             Console.Write("Enter your choice: ");
 
-            if (!int.TryParse(Console.ReadLine(), out int userInput)) 
+            if (!int.TryParse(Console.ReadLine(), out int userInput))
             {
                 Console.WriteLine("Invalid input! Please enter a valid integer");
                 break;
             }
 
-            switch(userInput) 
+            switch (userInput)
             {
-                case 1: 
+                case 1:
                     RegisterPatron(patronService);
                     break;
                 case 2:
-                        
+
                     break;
-                case 3: 
+                case 3:
                     patronService.ViewAllPatrons();
                     break;
                 case 4:
                     break;
-                case 5:    
+                case 5:
+                    ActiveLoans(patronService);
                     break;
-                case 0: 
+                case 0:
                     exit = true;
                     break;
-                }
+            }
         }
     }
 
-    static void RegisterPatron(PatronService service) 
+    static void RegisterPatron(PatronService service)
     {
         Console.Write("Enter the patron name: ");
         string name = Console.ReadLine()!;
 
-         Console.Write("Enter the patron Phone Number: ");
+        Console.Write("Enter the patron Phone Number: ");
         string phoneNumber = Console.ReadLine()!;
 
         Console.Write("Enter the patron Email: ");
         string email = Console.ReadLine()!;
 
-        var newPatron = new Patron 
+        var newPatron = new Patron
         {
             Name = name,
             PhoneNumber = phoneNumber,
@@ -65,5 +67,16 @@ public class PatronMenus
         };
 
         service.RegisterPatron(newPatron);
+    }
+
+    static void ActiveLoans(PatronService service)
+    {
+        Console.Write("Enter the Patron ID: ");
+        if (!int.TryParse(Console.ReadLine(), out int patronID))
+        {
+            Console.WriteLine("Invalid input! Please enter a valid integer");
+            return;
+        }
+        service.ViewActiveLoans(patronID);
     }
 }
