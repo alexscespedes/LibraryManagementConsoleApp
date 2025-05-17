@@ -2,10 +2,8 @@ namespace LibraryManagement;
 
 public class BookMenus 
 {
-    public void DisplayBookMenu()
+    public void DisplayBookMenu(BookService bookService)
     {
-        var repository = new BookRepository();
-        BookService bookService = new BookService(repository);
         bool exit = false;
 
         while (!exit)
@@ -44,6 +42,7 @@ public class BookMenus
                     break;
                 case 0:
                     exit = true;
+                    //
                     break;
             }
         }

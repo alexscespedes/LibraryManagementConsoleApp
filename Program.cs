@@ -3,7 +3,15 @@ class Program
 {
     static void Main(string[] args)
     {
-        var menuSystem = new MenuSystem();
+        var bookRepo = new BookRepository();
+        var patronRepo = new PatronRepository();
+        // var loanRepo = new LoanRepository();
+
+        var bookService = new BookService(bookRepo);
+        var patronService = new PatronService(patronRepo);
+        // var loanService = new LoanService(bookRepo, patronRepo);
+
+        var menuSystem = new MenuSystem(bookService, patronService);
         menuSystem.DisplayMainMenu();
     }
 }

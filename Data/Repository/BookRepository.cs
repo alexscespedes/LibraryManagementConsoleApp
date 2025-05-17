@@ -16,7 +16,7 @@ public class BookRepository
 
     public bool UpdateBook(Book newBook)
     {
-        var book = _books.SingleOrDefault(b => b.ISBN == newBook.ISBN);
+        var book = _books.FirstOrDefault(b => b.ISBN == newBook.ISBN);
 
         if (book != null) 
         {
