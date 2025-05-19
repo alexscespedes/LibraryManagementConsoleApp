@@ -2,10 +2,8 @@ namespace LibraryManagement;
 
 public class PatronMenus
 {
-    public void DisplayPatronMenu()
+    public void DisplayPatronMenu(PatronService patronService)
     {
-        var repository = new PatronRepository();
-        PatronService patronService = new PatronService(repository);
         bool exit = false;
 
         while (!exit)

@@ -41,7 +41,7 @@ public class MenuSystem
                     bookMenus.DisplayBookMenu(_bookService);
                     break;
                 case 2:
-                    patronMenus.DisplayPatronMenu();
+                    patronMenus.DisplayPatronMenu(_patronService);
                     break;
                 case 3:
                     loanMenus.DisplayLoanMenu();
