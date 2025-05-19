@@ -7,11 +7,15 @@ public class LoanService
     // BookService bookService = new BookService();
     private BookRepository _bookRepository;
     private PatronRepository _patronRepository;
+    private LoanRepository _loanRepository;
 
-    public LoanService(BookRepository bookRepository, PatronRepository patronRepository)
+    ConsoleHelper helper = new ConsoleHelper();
+
+    public LoanService(BookRepository bookRepository, PatronRepository patronRepository, LoanRepository loanRepository)
     {
         _bookRepository = bookRepository;
         _patronRepository = patronRepository;
+        _loanRepository = loanRepository;
     }
 
     public void CheckoutBook(string isbn, int patronID, int loanDurationDays = 14)
@@ -42,13 +46,29 @@ public class LoanService
             DueDate = today.AddDays(loanDurationDays),
             Status = LoanStatus.Active
         };
+        _loanRepository.AddLoan(loanedBook);
         patron.ActiveLoans.Add(loanedBook);
+        
         Console.WriteLine("Checkout made successfully.");
     }
 
     public bool ReturnBook(int id)
     {
         return true;
+    }
+
+    public void ViewAllLoans()
+    {
+        var loans = _loanRepository.GetAllLoans();
+        if (loans.Count == 0)
+        {
+            Console.WriteLine("No loans found");
+        }
+
+        foreach (var loan in loans)
+        {
+            helper.PrintLoans(loan);
+        }
     }
     
 

@@ -62,7 +62,7 @@ public class PatronService
             Console.WriteLine("Borrowed Books");
             foreach (var BorrowedBook in patron.ActiveLoans)
             {
-                helper.PrintPatronBorrowedBooks(BorrowedBook);
+                helper.PrintLoans(BorrowedBook);
             }
         }
     }

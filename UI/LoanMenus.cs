@@ -4,8 +4,6 @@ public class LoanMenus
 {
     public void DisplayLoanMenu(LoanService loanService)
     {
-        // var bookRepo = new BookRepository();
-        // var patronRepo = new PatronRepository();
         
         bool exit = false;
         while (!exit)
@@ -34,7 +32,7 @@ public class LoanMenus
 
                     break;
                 case 3:
-
+                    loanService.ViewAllLoans();
                     break;
                 case 4:
 

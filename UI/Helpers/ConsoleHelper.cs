@@ -15,7 +15,7 @@ public class ConsoleHelper
         Console.WriteLine($" Name: {patron.Name} | Phone Number: {patron.PhoneNumber} | Email: {patron.Email} | Number of Active Loans: {patron.ActiveLoans.Count}");
     }
 
-    public void PrintPatronBorrowedBooks(Loan loan)
+    public void PrintLoans(Loan loan)
     {
         Console.WriteLine($" Book Title: {loan.BorrowedBook.Title} | Patron Name: {loan.Borrower.Name} | Loan CheckoutDate: {loan.CheckoutDate} | Loan DueDate: {loan.DueDate} | Loan Status: {loan.Status}");
     }
