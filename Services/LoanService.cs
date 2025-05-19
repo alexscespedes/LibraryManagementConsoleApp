@@ -52,9 +52,20 @@ public class LoanService
         Console.WriteLine("Checkout made successfully.");
     }
 
-    public bool ReturnBook(int id)
+    public void ReturnBook(string isbn, int patronID)
     {
-        return true;
+        var loan = _loanRepository.GetLoan(isbn, patronID);
+
+        if (loan == null)
+        {
+            Console.WriteLine("Loan was not found.");
+            return;
+        }
+
+        // Calculate any late fees if applicable
+
+        loan.BorrowedBook.IsAvailable = true;
+        loan.Status = LoanStatus.Returned;
     }
 
     public void ViewAllLoans()

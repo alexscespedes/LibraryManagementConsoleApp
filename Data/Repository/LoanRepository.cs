@@ -11,5 +11,10 @@ public class LoanRepository
 
     public List<Loan> GetAllLoans() => _loans;
 
+    public Loan GetLoan(string isbn, int patronID)
+    {
+        return _loans.FirstOrDefault(loan => loan.BookISBN == isbn && loan.PatronId == patronID)!;
+    }
+
     public void AddLoan(Loan loan) => _loans.Add(loan);
 }

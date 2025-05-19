@@ -4,7 +4,7 @@ public class LoanMenus
 {
     public void DisplayLoanMenu(LoanService loanService)
     {
-        
+
         bool exit = false;
         while (!exit)
         {
@@ -26,10 +26,10 @@ public class LoanMenus
             switch (userInput)
             {
                 case 1:
-                    Checkout(loanService);
+                    CheckoutBook(loanService);
                     break;
                 case 2:
-
+                    ReturnBook(loanService);
                     break;
                 case 3:
                     loanService.ViewAllLoans();
@@ -49,7 +49,7 @@ public class LoanMenus
         }
     }
 
-    static void Checkout(LoanService service)
+    static void CheckoutBook(LoanService service)
     {
         Console.Write("Enter the Book ISBN: ");
         string isbn = Console.ReadLine()!;
@@ -61,5 +61,19 @@ public class LoanMenus
             return;
         }
         service.CheckoutBook(isbn, patronID);
+    }
+
+    static void ReturnBook(LoanService service)
+    {
+        Console.Write("Enter the Book ISBN: ");
+        string isbn = Console.ReadLine()!;
+
+        Console.Write("Enter the Patron ID: ");
+        if (!int.TryParse(Console.ReadLine(), out int patronID))
+        {
+            Console.WriteLine("Invalid input! Please enter a valid integer");
+            return;
+        }
+        service.ReturnBook(isbn, patronID);
     }
 }
