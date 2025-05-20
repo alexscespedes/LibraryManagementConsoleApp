@@ -48,63 +48,49 @@ public class BookMenus
         }
     }
 
-    static void AddBook (BookService service) 
+    static void AddBook(BookService service)
     {
-        Console.Write("Enter the book ISBN: ");
-        string isbn = Console.ReadLine()!;
 
-        Console.Write("Enter the book title: ");
-        string title = Console.ReadLine()!;
-
-        Console.Write("Enter the book author: ");
-        string author = Console.ReadLine()!;
-
-        Console.WriteLine("Select the book genre: ");
-        Console.WriteLine("1. Adventure");
-        Console.WriteLine("2. Business");
-        Console.WriteLine("3. Comedy");
-        Console.WriteLine("4. Romantic");
-        Console.WriteLine("5. Science");
-        Console.Write("Choose an option: ");
-        
-    
-        if (!int.TryParse(Console.ReadLine(), out int genreSelection)) 
+        var newBook1 = new Book
         {
-            Console.WriteLine("Invalid input! Please enter a valid integer");
-            return;
-        }
-        Genre genre;
-        switch (genreSelection) 
-        {
-            case 1:
-                genre = Genre.Adventure;
-                break;
-            case 2:
-                genre = Genre.Business;
-                break;
-            case 3:
-                genre = Genre.Comedy;
-                break;
-            case 4:
-                genre = Genre.Romantic;
-                break;
-            case 5:
-                genre = Genre.Science;
-                break;
-            default:
-                Console.WriteLine("Invalid option, please select (1-5)");
-                return;
-        }
-
-        var newBook = new Book 
-        {
-            ISBN = isbn,
-            Title = title,
-            Author = author,
-            GenreBook = genre
+            ISBN = "978-0-14310-595-4",
+            Title = "Moby-Dick",
+            Author = "Herman Melville",
+            GenreBook = Genre.Adventure
         };
-
-        service.AddBook(newBook);
+        service.AddBook(newBook1);
+        var newBook2 = new Book
+        {
+            ISBN = "978-0-14104-034-9",
+            Title = "Pride and Prejudice",
+            Author = "Penguin Publishing Group",
+            GenreBook = Genre.Comedy
+        };
+        service.AddBook(newBook2);
+        var newBook3 = new Book
+        {
+            ISBN = "978-1-77458-394-4",
+            Title = "Lean Marketing:",
+            Author = "Allan Dib",
+            GenreBook = Genre.Business
+        };
+        service.AddBook(newBook3);
+        var newBook4 = new Book
+        {
+            ISBN = "978-1-32408-671-0",
+            Title = "The Nvidia Way",
+            Author = "Tae Kim",
+            GenreBook = Genre.Science
+        };
+        service.AddBook(newBook4);
+        var newBook5 = new Book 
+        {
+            ISBN = "978-0-26382-523-7",
+            Title = "The Hot-Blooded Groom",
+            Author = "Herman Melville",
+            GenreBook = Genre.Romantic
+        };
+        service.AddBook(newBook5);
     }
 
     static void RemoveBook(BookService service) 
