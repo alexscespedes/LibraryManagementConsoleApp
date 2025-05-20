@@ -51,16 +51,11 @@ public class LoanMenus
 
     static void CheckoutBook(LoanService service)
     {
-        Console.Write("Enter the Book ISBN: ");
-        string isbn = Console.ReadLine()!;
-
-        Console.Write("Enter the Patron ID: ");
-        if (!int.TryParse(Console.ReadLine(), out int patronID))
-        {
-            Console.WriteLine("Invalid input! Please enter a valid integer");
-            return;
-        }
-        service.CheckoutBook(isbn, patronID);
+        service.CheckoutBook("978-0-14310-595-4", 1);
+        service.CheckoutBook("978-0-14104-034-9", 2);
+        service.CheckoutBook("978-1-77458-394-4", 3);
+        service.CheckoutBook("978-1-32408-671-0", 4);
+        service.CheckoutBook("978-0-26382-523-7", 5);
     }
 
     static void ReturnBook(LoanService service)

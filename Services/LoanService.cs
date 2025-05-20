@@ -48,7 +48,7 @@ public class LoanService
         };
         _loanRepository.AddLoan(loanedBook);
         patron.ActiveLoans.Add(loanedBook);
-        
+
         Console.WriteLine("Checkout made successfully.");
     }
 
@@ -66,6 +66,8 @@ public class LoanService
 
         loan.BorrowedBook.IsAvailable = true;
         loan.Status = LoanStatus.Returned;
+
+        Console.WriteLine("Book returned successfully.");
     }
 
     public void ViewAllLoans()
