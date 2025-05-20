@@ -33,7 +33,7 @@ public class LoanService
             Console.WriteLine("The book is not available");
         }
         book.IsAvailable = false;
-        DateTime today = DateTime.Now;
+        DateTime today = new DateTime(2025, 05, 09);
 
         // Create a loan object
         var loanedBook = new Loan
@@ -82,6 +82,27 @@ public class LoanService
         {
             helper.PrintLoans(loan);
         }
+    }
+
+    public void OverdueBooks()
+    {
+        var loans = _loanRepository.GetAllLoans();
+        foreach (var loan in loans)
+        {
+            if (loan.DueDate < DateTime.Now)
+            {
+                loan.Status = LoanStatus.Overdue;
+            }
+
+            TimeSpan interval = loan.DueDate - DateTime.Now;
+            if (interval.Days <= 3)
+            {
+                Console.WriteLine($"Loan for {loan.BorrowedBook.Title} per {loan.Borrower.Name} about to expire!");
+            }
+
+            Console.WriteLine($"{loan.BorrowedBook.Title} with {interval.Days} days left");
+        }
+
     }
     
 
