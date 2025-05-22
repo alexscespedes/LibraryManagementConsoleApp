@@ -5,17 +5,21 @@ public class MenuSystem
     private BookService _bookService;
     private PatronService _patronService;
     private LoanService _loanService;
-    public MenuSystem(BookService bookService, PatronService patronService, LoanService loanService)
+    private LibraryService _libraryService;
+    public MenuSystem(BookService bookService, PatronService patronService, LoanService loanService, LibraryService libraryService)
     {
         _bookService = bookService;
         _patronService = patronService;
         _loanService = loanService;
+        _libraryService = libraryService;
+
     }
     public void DisplayMainMenu()
     {
         BookMenus bookMenus = new BookMenus();
         PatronMenus patronMenus = new PatronMenus();
         LoanMenus loanMenus = new LoanMenus();
+        ReportMenus reportMenus = new ReportMenus();
         bool exit = false;
 
         while (!exit)
@@ -49,7 +53,7 @@ public class MenuSystem
                     loanMenus.DisplayLoanMenu(_loanService);
                     break;
                 case 4:
-
+                    reportMenus.DisplayReportsMenu(_libraryService);
                     break;
                 case 5:
                     break;
