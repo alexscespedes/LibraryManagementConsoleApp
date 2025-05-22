@@ -23,4 +23,15 @@ public class LibraryService
             Console.WriteLine($"Book {loan.BorrowedBook.Title} by {loan.Borrower.Name}");
         }
     }
+
+    public void PatronActivityReport()
+    {
+        var patronSortedByLoans = _patronRepository.GetAllPatrons().OrderBy(p => p.ActiveLoans.Count);
+
+        Console.WriteLine($"Patron Activity Report");
+        foreach (var patron in patronSortedByLoans)
+        {
+            Console.WriteLine($"Patron {patron.Name} has {patron.ActiveLoans.Count} Books Borrowed");
+        }
+    }
 }

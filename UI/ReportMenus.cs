@@ -29,7 +29,7 @@ public class ReportMenus
                     libraryService.OverdueBooksReport();
                     break;
                 case 2:
-                   
+                    libraryService.PatronActivityReport();
                     break;
                 case 3:
                   
