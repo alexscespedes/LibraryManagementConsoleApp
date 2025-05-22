@@ -4,7 +4,6 @@ namespace LibraryManagement;
 
 public class LoanService
 {
-    // BookService bookService = new BookService();
     private BookRepository _bookRepository;
     private PatronRepository _patronRepository;
     private LoanRepository _loanRepository;
@@ -33,7 +32,7 @@ public class LoanService
             Console.WriteLine("The book is not available");
         }
         book.IsAvailable = false;
-        DateTime today = new DateTime(2025, 05, 09);
+        DateTime today = new DateTime(2025, 05, 11);
 
         // Create a loan object
         var loanedBook = new Loan
@@ -44,7 +43,7 @@ public class LoanService
             Borrower = patron,
             CheckoutDate = today,
             DueDate = today.AddDays(loanDurationDays),
-            Status = LoanStatus.Active
+            Status = LoanStatus.Overdue
         };
         _loanRepository.AddLoan(loanedBook);
         patron.ActiveLoans.Add(loanedBook);
@@ -61,8 +60,6 @@ public class LoanService
             Console.WriteLine("Loan was not found.");
             return;
         }
-
-        // Calculate any late fees if applicable
 
         loan.BorrowedBook.IsAvailable = true;
         loan.Status = LoanStatus.Returned;
@@ -102,8 +99,25 @@ public class LoanService
 
             Console.WriteLine($"{loan.BorrowedBook.Title} with {interval.Days} days left");
         }
-
     }
-    
 
+    public void ProcessLateFees()
+    {
+        double dailyLateFeeRate = 0.25;
+        double loanLateFee = 0;
+        double totalLateFee = 0;
+
+        var loans = _loanRepository.GetAllLoans();
+        foreach (var loan in loans)
+        {
+            TimeSpan overDueDays = loan.DueDate - DateTime.Now;
+            if (loan.Status == LoanStatus.Overdue)
+            {
+                loanLateFee = overDueDays.Days * dailyLateFeeRate;
+                Console.WriteLine($"Loan for {loan.BorrowedBook.Title} per {loan.Borrower.Name} has a late rate of ${loanLateFee}");
+            }
+            totalLateFee += loanLateFee;
+        }
+        Console.WriteLine($" Total Late Fee: {totalLateFee}");
+    }
 }

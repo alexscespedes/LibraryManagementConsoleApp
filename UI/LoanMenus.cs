@@ -38,6 +38,7 @@ public class LoanMenus
                     loanService.OverdueBooks();
                     break;
                 case 5:
+                    loanService.ProcessLateFees();
                     break;
                 case 6:
 
