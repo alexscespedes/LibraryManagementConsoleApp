@@ -29,15 +29,7 @@ public class BookService
     public void ViewAllBooks()
     {
         var books = _bookRepository.GetAllBooks();
-        if (books.Count == 0)
-        {
-            Console.WriteLine("No books found");
-        }
-
-        foreach (var book in books)
-        {
-            helper.PrintBook(book);
-        }
+        helper.PrintBook(books);
     }
 
     public void RemoveBook(string isbn)
@@ -85,8 +77,13 @@ public class BookService
     {
         if (string.IsNullOrWhiteSpace(title))
         {
-            
+            Console.WriteLine("The title cannot be empty");
+            return;
         }
+
+        var booksPartialSearched = _bookRepository.GetAllBooks().Where(book => book.Title.Contains(title.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+        helper.PrintBook(booksPartialSearched);
     }
 
 }
