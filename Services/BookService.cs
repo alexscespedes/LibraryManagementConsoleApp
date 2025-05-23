@@ -1,6 +1,7 @@
 namespace LibraryManagement;
 
-public class BookService {
+public class BookService
+{
     private BookRepository _bookRepository;
     ConsoleHelper helper = new ConsoleHelper();
 
@@ -25,7 +26,7 @@ public class BookService {
         Console.WriteLine($"Book '{book.Title}' by {book.Author} added successfully.");
     }
 
-    public void ViewAllBooks() 
+    public void ViewAllBooks()
     {
         var books = _bookRepository.GetAllBooks();
         if (books.Count == 0)
@@ -39,7 +40,7 @@ public class BookService {
         }
     }
 
-    public void RemoveBook(string isbn) 
+    public void RemoveBook(string isbn)
     {
         var success = _bookRepository.RemoveBook(isbn);
 
@@ -79,4 +80,13 @@ public class BookService {
             Console.WriteLine($"No book found with ISBN: {newBook.ISBN}");
         }
     }
+
+    public void SearchBookByTitle(string title)
+    {
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            
+        }
+    }
+
 }

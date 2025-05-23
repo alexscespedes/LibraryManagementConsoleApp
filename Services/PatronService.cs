@@ -14,8 +14,8 @@ public class PatronService
     {
         if (string.IsNullOrEmpty(patron.Name))
         {
-            Console.WriteLine("Error: The Name is required.");
-            
+            Console.WriteLine("Error: The name is required.");
+
         }
 
         if (!helper.IsValidPhoneNumber(patron.PhoneNumber))
@@ -26,7 +26,7 @@ public class PatronService
 
         if (!helper.IsValidEmail(patron.Email))
         {
-            Console.WriteLine("The PhoneNumber is not valid");
+            Console.WriteLine("The Email is not valid");
             
         }
 
