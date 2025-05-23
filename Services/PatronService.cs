@@ -37,15 +37,7 @@ public class PatronService
     public void ViewAllPatrons()
     {
         var patrons = _patronRepository.GetAllPatrons();
-        if (patrons.Count == 0)
-        {
-            Console.WriteLine("No patrons found");
-        }
-
-        foreach (var patron in patrons)
-        {
-            helper.PrintPatron(patron);
-        }
+        helper.PrintPatron(patrons);
     }
 
     public void ViewActiveLoans(int patronID)
@@ -54,16 +46,7 @@ public class PatronService
 
         if (patron != null)
         {
-            if (patron.ActiveLoans.Count == 0)
-            {
-                Console.WriteLine("No Active Loans");
-                return;
-            }
-            Console.WriteLine("Borrowed Books");
-            foreach (var BorrowedBook in patron.ActiveLoans)
-            {
-                helper.PrintLoans(BorrowedBook);
-            }
+            helper.PrintLoans(patron.ActiveLoans);
         }
     }
     

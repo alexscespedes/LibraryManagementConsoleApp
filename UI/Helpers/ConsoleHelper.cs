@@ -3,23 +3,46 @@ using System.Text.RegularExpressions;
 namespace LibraryManagement;
 
 public class ConsoleHelper 
-{
-    public void PrintBook(Book book) 
+{   
+    public void PrintBook(List<Book> books)
     {
-        string status = book.IsAvailable ? "Available" : "Not Available";
-        Console.WriteLine($" ISBN: {book.ISBN} | Title: {book.Title} | Author: {book.Author} | Genre: {book.GenreBook} | Status: {status} ");
+        if (books.Count == 0)
+        {
+            Console.WriteLine("Books not found");
+            return;
+        }
+        foreach (var book in books)
+        {
+            string status = book.IsAvailable ? "Available" : "Not Available";
+            Console.WriteLine($" ISBN: {book.ISBN} | Title: {book.Title} | Author: {book.Author} | Genre: {book.GenreBook} | Status: {status} ");
+        }
     }
 
-    public void PrintPatron(Patron patron) 
+    public void PrintPatron(List<Patron> patrons)
     {
-        Console.WriteLine($" Name: {patron.Name} | Phone Number: {patron.PhoneNumber} | Email: {patron.Email} | Number of Active Loans: {patron.ActiveLoans.Count}");
+        if (patrons.Count == 0)
+        {
+            Console.WriteLine("Patrons not found");
+            return;
+        }
+        foreach (var patron in patrons)
+        {
+            Console.WriteLine($" Name: {patron.Name} | Phone Number: {patron.PhoneNumber} | Email: {patron.Email} | Number of Active Loans: {patron.ActiveLoans.Count}");
+        }
     }
 
-    public void PrintLoans(Loan loan)
+    public void PrintLoans(List<Loan> loans)
     {
-        Console.WriteLine($" Book Title: {loan.BorrowedBook.Title} | Patron Name: {loan.Borrower.Name} | Loan CheckoutDate: {loan.CheckoutDate} | Loan DueDate: {loan.DueDate} | Loan Status: {loan.Status}");
+        if (loans.Count == 0)
+        {
+            Console.WriteLine("Loans not found");
+            return;
+        }
+        foreach (var loan in loans)
+        {
+            Console.WriteLine($" Book Title: {loan.BorrowedBook.Title} | Patron Name: {loan.Borrower.Name} | Loan CheckoutDate: {loan.CheckoutDate} | Loan DueDate: {loan.DueDate} | Loan Status: {loan.Status}");
+        }
     }
-    
 
     public bool IsValidISBNCode(string str)
     {

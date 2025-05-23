@@ -70,15 +70,7 @@ public class LoanService
     public void ViewAllLoans()
     {
         var loans = _loanRepository.GetAllLoans();
-        if (loans.Count == 0)
-        {
-            Console.WriteLine("No loans found");
-        }
-
-        foreach (var loan in loans)
-        {
-            helper.PrintLoans(loan);
-        }
+        helper.PrintLoans(loans);
     }
 
     public void OverdueBooks()
