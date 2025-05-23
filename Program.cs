@@ -10,9 +10,9 @@ class Program
         var bookService = new BookService(bookRepo);
         var patronService = new PatronService(patronRepo);
         var loanService = new LoanService(bookRepo, patronRepo, loanRepo);
-        var libraryService = new LibraryService(patronRepo, loanRepo);
+        var reportService = new ReportService(patronRepo, loanRepo);
 
-        var menuSystem = new MenuSystem(bookService, patronService, loanService, libraryService);
+        var menuSystem = new MenuSystem(bookService, patronService, loanService, reportService);
         menuSystem.DisplayMainMenu();
     }
 }

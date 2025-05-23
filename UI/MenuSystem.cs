@@ -5,13 +5,13 @@ public class MenuSystem
     private BookService _bookService;
     private PatronService _patronService;
     private LoanService _loanService;
-    private LibraryService _libraryService;
-    public MenuSystem(BookService bookService, PatronService patronService, LoanService loanService, LibraryService libraryService)
+    private ReportService _reportService;
+    public MenuSystem(BookService bookService, PatronService patronService, LoanService loanService, ReportService reportService)
     {
         _bookService = bookService;
         _patronService = patronService;
         _loanService = loanService;
-        _libraryService = libraryService;
+        _reportService = reportService;
 
     }
     public void DisplayMainMenu()
@@ -53,7 +53,7 @@ public class MenuSystem
                     loanMenus.DisplayLoanMenu(_loanService);
                     break;
                 case 4:
-                    reportMenus.DisplayReportsMenu(_libraryService);
+                    reportMenus.DisplayReportsMenu(_reportService);
                     break;
                 case 5:
                     break;

@@ -2,7 +2,7 @@ namespace LibraryManagement;
 
 public class ReportMenus 
 {
-    public void DisplayReportsMenu(LibraryService libraryService) 
+    public void DisplayReportsMenu(ReportService reportService) 
     {
         bool exit = false;
 
@@ -24,13 +24,13 @@ public class ReportMenus
             switch (userInput)
             {
                 case 1:
-                    libraryService.OverdueBooksReport();
+                    reportService.OverdueBooksReport();
                     break;
                 case 2:
-                    libraryService.PatronActivityReport();
+                    reportService.PatronActivityReport();
                     break;
                 case 3:
-                    libraryService.CurrentLoansReport();
+                    reportService.CurrentLoansReport();
                     break;
                 case 4:
               
