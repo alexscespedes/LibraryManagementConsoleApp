@@ -3,7 +3,7 @@ namespace LibraryManagement;
 public class BookRepository
 {
     private List<Book> _books;
-    DataManager dataManager = new DataManager();
+    FileHandler fileHandler = new FileHandler();
 
     public BookRepository()
     {
@@ -32,5 +32,5 @@ public class BookRepository
         return false;
     }
 
-    public void SaveBookToJson() => dataManager.SaveBookToJsonFile(_books);
+    public void SaveBookToJson() => fileHandler.SaveBookToJsonFile(_books);
 }

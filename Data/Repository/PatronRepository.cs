@@ -3,7 +3,7 @@ namespace LibraryManagement;
 public class PatronRepository
 {
     private List<Patron> _patrons;
-    DataManager dataManager = new DataManager();
+    FileHandler fileHandler = new FileHandler();
 
     public PatronRepository()
     {
@@ -34,5 +34,5 @@ public class PatronRepository
         return false;
     }
 
-    public void SavePatronToJson() => dataManager.SavePatronToJsonFile(_patrons);
+    public void SavePatronToJson() => fileHandler.SavePatronToJsonFile(_patrons);
 }

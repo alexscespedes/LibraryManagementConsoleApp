@@ -6,12 +6,14 @@ public class MenuSystem
     private PatronService _patronService;
     private LoanService _loanService;
     private ReportService _reportService;
-    public MenuSystem(BookService bookService, PatronService patronService, LoanService loanService, ReportService reportService)
+    private DataManager _dataManager;
+    public MenuSystem(BookService bookService, PatronService patronService, LoanService loanService, ReportService reportService, DataManager dataManager)
     {
         _bookService = bookService;
         _patronService = patronService;
         _loanService = loanService;
         _reportService = reportService;
+        _dataManager = dataManager;
 
     }
     public void DisplayMainMenu()
@@ -56,6 +58,7 @@ public class MenuSystem
                     reportMenus.DisplayReportsMenu(_reportService);
                     break;
                 case 5:
+                    _dataManager.SaveDataToJsonFile();
                     break;
                 case 6:
 

@@ -4,7 +4,7 @@ public class LoanRepository
 {
     private List<Loan> _loans;
 
-    DataManager dataManager = new DataManager();
+    FileHandler fileHandler = new FileHandler();
 
     public LoanRepository()
     {
@@ -20,5 +20,5 @@ public class LoanRepository
 
     public void AddLoan(Loan loan) => _loans.Add(loan);
 
-    public void SaveLoanToJson() => dataManager.SaveLoanToJsonFile(_loans);
+    public void SaveLoanToJson() => fileHandler.SaveLoanToJsonFile(_loans);
 }

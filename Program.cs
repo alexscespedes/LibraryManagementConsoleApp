@@ -11,8 +11,9 @@ class Program
         var patronService = new PatronService(patronRepo);
         var loanService = new LoanService(bookRepo, patronRepo, loanRepo);
         var reportService = new ReportService(patronRepo, loanRepo);
+        DataManager dataManager = new DataManager(bookRepo, patronRepo, loanRepo);
 
-        var menuSystem = new MenuSystem(bookService, patronService, loanService, reportService);
+        var menuSystem = new MenuSystem(bookService, patronService, loanService, reportService, dataManager);
         menuSystem.DisplayMainMenu();
     }
 }

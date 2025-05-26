@@ -1,36 +1,29 @@
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
 namespace LibraryManagement;
 
 public class DataManager
 {
-    string filePath = "/home/alexsc03/Documents/Projects/DotNet/C-SharpConsoleApps/LibraryManagementSystem/Data/Json/";
-    public void SaveBookToJsonFile(List<Book> books)
+    private BookRepository _bookRepository;
+    private PatronRepository _patronRepository;
+    private LoanRepository _loanRepository;
+
+    public DataManager(BookRepository bookRepository, PatronRepository patronRepository, LoanRepository loanRepository)
     {
-        string jsonString = JsonSerializer.Serialize(books, new JsonSerializerOptions() { WriteIndented = true });
-        using (StreamWriter outputFile = new StreamWriter(filePath + "Books.json"))
-        {
-            outputFile.WriteLine(jsonString);
-        }
+        _bookRepository = bookRepository;
+        _patronRepository = patronRepository;
+        _loanRepository = loanRepository;
     }
 
-    public void SavePatronToJsonFile(List<Patron> patrons)
+    public void SaveDataToJsonFile()
     {
-        string jsonString = JsonSerializer.Serialize(patrons, new JsonSerializerOptions() { WriteIndented = true });
-        using (StreamWriter outputFile = new StreamWriter(filePath + "Patrons.json"))
-        {
-            outputFile.WriteLine(jsonString);
-        }
+        _bookRepository.SaveBookToJson();
+        _patronRepository.SavePatronToJson();
+        _loanRepository.SaveLoanToJson();
+        Console.WriteLine("Data successfully saved");
+        Console.ReadLine();
     }
-
-    public void SaveLoanToJsonFile(List<Loan> loans)
+    
+    public void LoadDataToJsonFile()
     {
-        var options = new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.Preserve, MaxDepth = 256, WriteIndented = true };
-        string jsonString = JsonSerializer.Serialize(loans, options);
-        using (StreamWriter outputFile = new StreamWriter(filePath + "Loans.json"))
-        {
-            outputFile.WriteLine(jsonString);
-        }
+        
     }
 }

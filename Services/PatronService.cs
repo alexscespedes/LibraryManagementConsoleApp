@@ -31,7 +31,6 @@ public class PatronService
         }
 
         _patronRepository.AddPatron(patron);
-        _patronRepository.SavePatronToJson();
         Console.WriteLine($"Patron '{patron.Name}' created successfully.");
     }
 

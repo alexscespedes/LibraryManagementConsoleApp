@@ -46,7 +46,6 @@ public class LoanService
             Status = LoanStatus.Overdue
         };
         _loanRepository.AddLoan(loanedBook);
-        _loanRepository.SaveLoanToJson();
         patron.ActiveLoans.Add(loanedBook);
 
         Console.WriteLine("Checkout made successfully.");
