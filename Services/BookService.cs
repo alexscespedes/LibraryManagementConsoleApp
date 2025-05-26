@@ -23,6 +23,7 @@ public class BookService
         }
 
         _bookRepository.AddBook(book);
+        _bookRepository.SaveBookToJson();
         Console.WriteLine($"Book '{book.Title}' by {book.Author} added successfully.");
     }
 

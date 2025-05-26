@@ -3,6 +3,7 @@ namespace LibraryManagement;
 public class PatronRepository
 {
     private List<Patron> _patrons;
+    DataManager dataManager = new DataManager();
 
     public PatronRepository()
     {
@@ -20,7 +21,7 @@ public class PatronRepository
     {
         var patron = _patrons.FirstOrDefault(p => p.Id == newPatron.Id);
 
-        if (patron != null) 
+        if (patron != null)
         {
             patron.Name = newPatron.Name;
             patron.PhoneNumber = newPatron.PhoneNumber;
@@ -29,7 +30,9 @@ public class PatronRepository
             Console.WriteLine("Book updated successfully.");
             return true;
         }
-            Console.WriteLine($"No book found with ISBN: {newPatron.Id}");
-            return false;
+        Console.WriteLine($"No book found with ISBN: {newPatron.Id}");
+        return false;
     }
+
+    public void SavePatronToJson() => dataManager.SavePatronToJsonFile(_patrons);
 }

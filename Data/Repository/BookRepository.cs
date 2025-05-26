@@ -3,6 +3,7 @@ namespace LibraryManagement;
 public class BookRepository
 {
     private List<Book> _books;
+    DataManager dataManager = new DataManager();
 
     public BookRepository()
     {
@@ -18,7 +19,7 @@ public class BookRepository
     {
         var book = _books.FirstOrDefault(b => b.ISBN == newBook.ISBN);
 
-        if (book != null) 
+        if (book != null)
         {
             book.Title = newBook.Title;
             book.Author = newBook.Author;
@@ -27,7 +28,9 @@ public class BookRepository
             Console.WriteLine("Book updated successfully.");
             return true;
         }
-            Console.WriteLine($"No book found with ISBN: {newBook.ISBN}");
-            return false;
+        Console.WriteLine($"No book found with ISBN: {newBook.ISBN}");
+        return false;
     }
+
+    public void SaveBookToJson() => dataManager.SaveBookToJsonFile(_books);
 }
