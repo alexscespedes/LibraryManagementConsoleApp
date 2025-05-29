@@ -1,3 +1,4 @@
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -6,14 +7,20 @@ namespace LibraryManagement;
 public class FileHandler
 {
     string filePath = "/home/alexsc03/Documents/Projects/DotNet/C-SharpConsoleApps/LibraryManagementSystem/Data/Json/";
-    JsonSerializerOptions options = new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.Preserve, MaxDepth = 256, WriteIndented = true };
+    JsonSerializerOptions options = new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.IgnoreCycles, MaxDepth = 256, WriteIndented = true };
     public void SaveBookToJsonFile(List<Book> books)
     {
         string jsonString = JsonSerializer.Serialize(books, options);
-        using (StreamWriter outputFile = new StreamWriter(filePath + "Books.json"))
-        {
-            outputFile.WriteLine(jsonString);
-        }
+        File.WriteAllText(filePath + "Books.json", jsonString);
+    }
+
+    public List<Book> LoadBookFromJsonToList()
+    {
+        var SerializationOptions = new JsonSerializerOptions();
+        SerializationOptions.Converters.Add(new StringConverter());
+        string json = File.ReadAllText(filePath + "Books.json");
+        var bookList = JsonSerializer.Deserialize<List<Book>>(json, SerializationOptions)!;
+        return bookList;
     }
 
     public void SavePatronToJsonFile(List<Patron> patrons)
@@ -25,6 +32,15 @@ public class FileHandler
         }
     }
 
+    public List<Patron> LoadPatronFromJsonToList()
+    {
+        var SerializationOptions = new JsonSerializerOptions();
+        SerializationOptions.Converters.Add(new StringConverter());
+        string json = File.ReadAllText(filePath + "Patrons.json");
+        var patronList = JsonSerializer.Deserialize<List<Patron>>(json, SerializationOptions)!;
+        return patronList;
+    }
+
     public void SaveLoanToJsonFile(List<Loan> loans)
     {
         string jsonString = JsonSerializer.Serialize(loans, options);
@@ -32,5 +48,14 @@ public class FileHandler
         {
             outputFile.WriteLine(jsonString);
         }
+    }
+
+    public List<Loan> LoadLoanFromJsonToList()
+    {
+        var SerializationOptions = new JsonSerializerOptions();
+        SerializationOptions.Converters.Add(new StringConverter());
+        string json = File.ReadAllText(filePath + "Loans.json");
+        var loanList = JsonSerializer.Deserialize<List<Loan>>(json, SerializationOptions)!;
+        return loanList;
     }
 }

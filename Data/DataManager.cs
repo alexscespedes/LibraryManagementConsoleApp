@@ -21,9 +21,13 @@ public class DataManager
         Console.WriteLine("Data successfully saved");
         Console.ReadLine();
     }
-    
+
     public void LoadDataToJsonFile()
     {
-        
+        _bookRepository.LoadBookToJson();
+        _patronRepository.LoadPatronToJson();
+        _loanRepository.LoadLoanToJson();
+        Console.WriteLine("Data successfully loaded");
+        Console.ReadLine();
     }
 }

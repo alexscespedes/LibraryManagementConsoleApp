@@ -21,4 +21,6 @@ public class LoanRepository
     public void AddLoan(Loan loan) => _loans.Add(loan);
 
     public void SaveLoanToJson() => fileHandler.SaveLoanToJsonFile(_loans);
+
+    public void LoadLoanToJson() => _loans = fileHandler.LoadLoanFromJsonToList();
 }

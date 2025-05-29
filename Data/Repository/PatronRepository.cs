@@ -35,4 +35,6 @@ public class PatronRepository
     }
 
     public void SavePatronToJson() => fileHandler.SavePatronToJsonFile(_patrons);
+
+    public void LoadPatronToJson() => _patrons = fileHandler.LoadPatronFromJsonToList();
 }

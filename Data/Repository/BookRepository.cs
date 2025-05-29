@@ -33,4 +33,6 @@ public class BookRepository
     }
 
     public void SaveBookToJson() => fileHandler.SaveBookToJsonFile(_books);
+
+    public void LoadBookToJson() => _books = fileHandler.LoadBookFromJsonToList();
 }

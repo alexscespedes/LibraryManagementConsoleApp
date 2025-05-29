@@ -61,7 +61,7 @@ public class MenuSystem
                     _dataManager.SaveDataToJsonFile();
                     break;
                 case 6:
-
+                    _dataManager.LoadDataToJsonFile();
                     break;
                 case 0:
                     exit = true;
