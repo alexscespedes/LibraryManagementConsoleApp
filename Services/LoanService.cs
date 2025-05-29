@@ -32,7 +32,7 @@ public class LoanService
             Console.WriteLine("The book is not available");
         }
         book.IsAvailable = false;
-        DateTime today = new DateTime(2025, 05, 11);
+        DateTime today = DateTime.Now;
 
         // Create a loan object
         var loanedBook = new Loan
@@ -102,8 +102,8 @@ public class LoanService
         var loans = _loanRepository.GetAllLoans();
         foreach (var loan in loans)
         {
-            TimeSpan overDueDays = loan.DueDate - DateTime.Now;
-            if (loan.Status == LoanStatus.Overdue)
+            TimeSpan overDueDays = DateTime.Now - loan.DueDate;
+            if (overDueDays.Days > 0)
             {
                 loanLateFee = overDueDays.Days * dailyLateFeeRate;
                 Console.WriteLine($"Loan for {loan.BorrowedBook.Title} per {loan.Borrower.Name} has a late rate of ${loanLateFee}");

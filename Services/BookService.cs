@@ -15,11 +15,13 @@ public class BookService
         if (!helper.IsValidISBNCode(book.ISBN))
         {
             Console.WriteLine("The ISBN is not valid");
+            return;
         }
 
         if (string.IsNullOrEmpty(book.Title) || string.IsNullOrEmpty(book.Author))
         {
             Console.WriteLine("Error: Title and Author are required.");
+            return;
         }
 
         _bookRepository.AddBook(book);
@@ -81,7 +83,9 @@ public class BookService
             return;
         }
 
-        var booksPartialSearched = _bookRepository.GetAllBooks().Where(book => book.Title.Contains(title.Trim(), StringComparison.InvariantCultureIgnoreCase)).ToList();
+        var booksPartialSearched = _bookRepository.GetAllBooks().Where(book => book.Title.Contains(title.Trim(), StringComparison.OrdinalIgnoreCase)
+        || book.Author.Contains(title.Trim(), StringComparison.OrdinalIgnoreCase)
+        ).ToList();
 
         helper.PrintBook(booksPartialSearched);
     }
