@@ -16,10 +16,8 @@ public class FileHandler
 
     public List<Book> LoadBookFromJsonToList()
     {
-        var SerializationOptions = new JsonSerializerOptions();
-        SerializationOptions.Converters.Add(new StringConverter());
         string json = File.ReadAllText(filePath + "Books.json");
-        var bookList = JsonSerializer.Deserialize<List<Book>>(json, SerializationOptions)!;
+        var bookList = JsonSerializer.Deserialize<List<Book>>(json)!;
         return bookList;
     }
 
@@ -34,10 +32,8 @@ public class FileHandler
 
     public List<Patron> LoadPatronFromJsonToList()
     {
-        var SerializationOptions = new JsonSerializerOptions();
-        SerializationOptions.Converters.Add(new StringConverter());
         string json = File.ReadAllText(filePath + "Patrons.json");
-        var patronList = JsonSerializer.Deserialize<List<Patron>>(json, SerializationOptions)!;
+        var patronList = JsonSerializer.Deserialize<List<Patron>>(json)!;
         return patronList;
     }
 
@@ -52,10 +48,8 @@ public class FileHandler
 
     public List<Loan> LoadLoanFromJsonToList()
     {
-        var SerializationOptions = new JsonSerializerOptions();
-        SerializationOptions.Converters.Add(new StringConverter());
         string json = File.ReadAllText(filePath + "Loans.json");
-        var loanList = JsonSerializer.Deserialize<List<Loan>>(json, SerializationOptions)!;
+        var loanList = JsonSerializer.Deserialize<List<Loan>>(json)!;
         return loanList;
     }
 }

@@ -43,7 +43,7 @@ public class LoanService
             Borrower = patron,
             CheckoutDate = today,
             DueDate = today.AddDays(loanDurationDays),
-            Status = LoanStatus.Overdue
+            Status = LoanStatus.Active
         };
         _loanRepository.AddLoan(loanedBook);
         patron.ActiveLoans.Add(loanedBook);
