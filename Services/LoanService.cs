@@ -24,12 +24,13 @@ public class LoanService
 
         if (book == null || patron == null)
         {
-            Console.WriteLine("Book and Patron were not found.");
+            Console.WriteLine("Book or Patron were not found.");
             return;
         }
         else if (!book.IsAvailable)
         {
             Console.WriteLine("The book is not available");
+            return;
         }
         book.IsAvailable = false;
         DateTime today = DateTime.Now;
