@@ -69,44 +69,47 @@ public class LoanService
 
     public void ViewAllLoans()
     {
+        RefreshLoanStatues();
         var loans = _loanRepository.GetAllLoans();
         helper.PrintLoans(loans);
     }
 
-    public void OverdueBooks()
+    public void RefreshLoanStatues()
     {
-        var loans = _loanRepository.GetAllLoans();
-        foreach (var loan in loans)
+        var allLoans = _loanRepository.GetAllLoans();
+        bool StatusChanged = false;
+
+        foreach (var loan in allLoans)
         {
-            if (loan.DueDate < DateTime.Now)
+            if (loan.Status == LoanStatus.Active && loan.DueDate < DateTime.Now)
             {
                 loan.Status = LoanStatus.Overdue;
+                StatusChanged = true;
             }
+        }
 
-            TimeSpan interval = loan.DueDate - DateTime.Now;
-            if (interval.Days <= 3)
-            {
-                Console.WriteLine($"Loan for {loan.BorrowedBook.Title} per {loan.Borrower.Name} about to expire!");
-            }
-
-            Console.WriteLine($"{loan.BorrowedBook.Title} with {interval.Days} days left");
+        if (StatusChanged)
+        {
+            _loanRepository.SaveLoanToJson();
         }
     }
 
-    public void ProcessLateFees()
+    public void ProcessLateFees(decimal dailyLateFeeRate = 0.25m)
     {
-        double dailyLateFeeRate = 0.25;
+        
         double loanLateFee = 0;
         double totalLateFee = 0;
 
-        var loans = _loanRepository.GetAllLoans();
-        foreach (var loan in loans)
+        RefreshLoanStatues();
+
+        var overdueLoans = _loanRepository.GetAllLoans().Where(l => l.Status == LoanStatus.Overdue).ToList();
+        foreach (var loan in overdueLoans)
         {
-            TimeSpan overDueDays = DateTime.Now - loan.DueDate;
-            if (overDueDays.Days > 0)
+            var daysLate = (DateTime.Now - loan.DueDate).Days;
+            if (daysLate > 0)
             {
-                loanLateFee = overDueDays.Days * dailyLateFeeRate;
-                Console.WriteLine($"Loan for {loan.BorrowedBook.Title} per {loan.Borrower.Name} has a late rate of ${loanLateFee}");
+                var fee = daysLate * dailyLateFeeRate;
+                Console.WriteLine($"Loan for {loan.BorrowedBook.Title} per {loan.Borrower.Name} | Days Late: {daysLate} | Fee: ${fee:C}");
             }
             totalLateFee += loanLateFee;
         }
